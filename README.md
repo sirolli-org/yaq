@@ -60,6 +60,12 @@ Se trata de una aplicación web diseñada para la gestión de los procesos típi
         php artisan migrate
     ```
 
+7. Genera la clave de la aplicación:
+
+    ```bash
+        php artisan key:generate
+    ```
+
 ## Desarrollo
 
 Para ejecutar la aplicación en un entorno de desarrollo, puede utilizar el servidor de desarrollo integrado de Laravel:
