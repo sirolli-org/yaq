@@ -39,7 +39,7 @@ Instale las dependencias del proyecto utilizando _composer_:
 composer install
 ```
 
-Configura el archivo `.env` con la información de su base de datos y otros parametros necesarios. Puedes copiar el archivo de ejemplo y luego editarlo:
+Configura el archivo `.env` con la información de su base de datos y otros parametros necesarios. Puede copiar el archivo de ejemplo y luego editarlo:
 
 ```bash
 cp .env.example .env
@@ -54,7 +54,7 @@ php artisan migrate
 Genere la clave de la aplicación para asegurar las sesiones y otros datos cifrados:
 
 ```bash
-php artisan key:generate
+php artisan key:generate --force
 ```
 
 ## Despliegue
@@ -101,19 +101,13 @@ Por último, se tiene que configurar un servidor web para servir los archivos, a
 Instale [Podman](https://podman.io/) y luego ejecute el siguiente comando para construir la imagen del contenedor:
 
 ```bash
-podman build -t sirolli-yaq:latest .
+podman-compose -f compose.yml build --no-cache
 ```
 
 Luego, ejecute el contenedor con el siguiente comando:
 
 ```bash
-podman run -d -p 8000:8080 --name sirolli-yaq sirolli-yaq:latest
-```
-
-O use el archivo `compose.yml` para iniciar los servicios con Podman Compose:
-
-```bash
 podman-compose -f compose.yml up -d
-``` 
+```
 
 Luego acceda a `http://localhost:8000` en su navegador para ver la aplicación en acción.
