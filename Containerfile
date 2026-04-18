@@ -6,6 +6,17 @@ COPY resources ./resources
 COPY public ./public
 RUN npm ci --no-audit && npm run build
 
+FROM composer:2 AS composer-builder
+WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-progress \
+    --prefer-dist \
+    --optimize-autoloader \
+    --ignore-platform-reqs
+
 FROM php:8.4-apache-bookworm
 
 # Install system dependencies and PHP extensions required by Laravel.
@@ -38,9 +49,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && a2enmod expires headers rewrite \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Composer.
-COPY --from=docker.io/library/composer:2 /usr/bin/composer /usr/bin/composer
-
 ENV APACHE_DOCUMENT_ROOT=/app/public \
     APACHE_LISTEN_PORT=8080
 
@@ -67,8 +75,8 @@ RUN sed -ri 's/^Listen 80$/Listen 8080/' /etc/apache2/ports.conf \
     && printf 'ServerName localhost\n' > /etc/apache2/conf-available/servername.conf \
     && a2enconf servername
 
-# Install PHP dependencies after the full app is present so Composer scripts can run.
-RUN composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader
+# Copy PHP dependencies from the composer stage.
+COPY --from=composer-builder --chown=www-data:www-data /app/vendor ./vendor
 
 # Prepare writable application paths and runtime directories.
 RUN mkdir -p \
