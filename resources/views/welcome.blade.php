@@ -23,7 +23,7 @@
     <div>
         <main role="main">
             <div>
-                <img src="{{ asset('quiosco-6017.svg') }}" alt="Quiosco 6017" class="w-64 h-auto">
+                <img src="{{ asset('yaq-logo.svg') }}" alt="Logo de YAQ" class="w-64 h-auto">
             </div>
 
             <div class="mt-6">
