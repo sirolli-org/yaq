@@ -1,0 +1,133 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Containerfile
+    container_name: yaq-app
+    restart: unless-stopped
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      APP_DEBUG: ${APP_DEBUG:-true}
+      APP_URL: ${APP_URL:-http://localhost:8080}
+      LOG_CHANNEL: ${LOG_CHANNEL:-stack}
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      SESSION_DRIVER: ${SESSION_DRIVER:-database}
+      QUEUE_CONNECTION: ${QUEUE_CONNECTION:-database}
+      CACHE_STORE: ${CACHE_STORE:-database}
+      MAIL_MAILER: ${MAIL_MAILER:-log}
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${APP_PORT:-8080}/up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  mysql:
+    image: mysql:8.0
+    container_name: yaq-mysql
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - db-mysql:/var/lib/mysql
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Containerfile.migrate
+    container_name: yaq-migrate
+    restart: "no"
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: php artisan migrate --force
+
+  redis:
+    image: redis:8-alpine
+    container_name: yaq-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - db-redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: redis-server --appendonly yes
+    profiles:
+      - redis
+
+  # Optional: Database management UI
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: yaq-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ${DB_USERNAME}
+      PMA_PASSWORD: ${DB_PASSWORD}
+      PMA_PORT: 3306
+    ports:
+      - "${PHPMYADMIN_PORT:-8081}:80"
+    depends_on:
+      - mysql
+    profiles:
+      - dev
+      - mysql
+
+  # Optional: Mailhog for email testing
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: yaq-mailhog
+    restart: unless-stopped
+    ports:
+      - "${MAILHOG_SMTP_PORT:-1025}:1025"
+      - "${MAILHOG_UI_PORT:-8025}:8025"
+    profiles:
+      - dev
+
+volumes:
+  db-mysql:
+    driver: local
+  db-redis:
+    driver: local

@@ -1,0 +1,43 @@
+FROM php:8.4-cli-bookworm
+
+# Install dependencies and PHP extensions required to run Laravel migrations.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    libicu-dev \
+    libonig-dev \
+    libzip-dev \
+    unzip \
+    zip \
+    && docker-php-ext-install -j"$(nproc)" \
+        bcmath \
+        intl \
+        mbstring \
+        pdo_mysql \
+        zip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Composer.
+COPY --from=docker.io/library/composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /app
+
+# Copy the application code needed for artisan commands.
+COPY composer.json composer.lock ./
+COPY app ./app
+COPY bootstrap ./bootstrap
+COPY config ./config
+COPY database ./database
+COPY resources ./resources
+COPY routes ./routes
+COPY artisan ./artisan
+
+RUN composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader \
+    && mkdir -p \
+        bootstrap/cache \
+        storage/framework/cache \
+        storage/framework/sessions \
+        storage/framework/testing \
+        storage/framework/views \
+        storage/logs
+
+CMD ["php", "artisan", "migrate", "--force"]
