@@ -1,5 +1,5 @@
 # Multi-stage build for rootless Laravel 13 container with Apache
-FROM node:24-bookworm-slim AS node-builder
+FROM node:24-trixie-slim AS node-builder
 WORKDIR /app
 COPY package.json package-lock.json vite.config.js ./
 COPY resources ./resources
@@ -15,9 +15,10 @@ RUN composer install \
     --no-progress \
     --prefer-dist \
     --optimize-autoloader \
-    --ignore-platform-reqs
+    --ignore-platform-reqs \
+    --no-scripts
 
-FROM php:8.4-apache-bookworm
+FROM php:8.4-apache-trixie
 
 # Install system dependencies and PHP extensions required by Laravel.
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -76,6 +77,9 @@ RUN sed -ri 's/^Listen 80$/Listen 8080/' /etc/apache2/ports.conf \
 
 # Copy PHP dependencies from the composer stage.
 COPY --from=composer-builder --chown=www-data:www-data /app/vendor ./vendor
+
+# Run post-install scripts now that the full app is available.
+RUN php artisan package:discover --ansi
 
 # Prepare writable application paths and runtime directories.
 RUN mkdir -p \
