@@ -25,9 +25,9 @@
      inkscape:deskcolor="#d1d1d1"
      showguides="true"
      inkscape:zoom="3.08"
-     inkscape:cx="145.77922"
-     inkscape:cy="72.077922"
-     inkscape:window-width="1920"
+     inkscape:cx="131.00649"
+     inkscape:cy="108.11688"
+     inkscape:window-width="1876"
      inkscape:window-height="1052"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -39,7 +39,7 @@
        id="guide4"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="380.84416,75"
+       position="140.58442,75"
        orientation="0,-1"
        id="guide5"
        inkscape:locked="false" />
@@ -70,42 +70,37 @@
        inkscape:locked="false" />
   </sodipodi:namedview>
   <path
-     d="m 50.844156,39.285714 30,17.5 v 35 l -30,17.499996 -30,-17.499996 v -35 z"
+     d="M 55.863812,39.683008 89.836818,59.500595 V 99.135769 L 55.863812,118.95335 21.890807,99.135769 V 59.500595 Z"
      stroke="#ff2d20"
-     stroke-width="6"
+     stroke-width="6.7946"
      stroke-linejoin="round"
      id="path1" />
   <ellipse
-     cx="50.844154"
-     cy="74.61039"
+     cx="55.863815"
+     cy="79.685852"
      stroke="#ff2d20"
-     stroke-width="4.46411"
+     stroke-width="5.05531"
      id="circle2"
-     rx="15.91122"
-     ry="15.261871" />
+     rx="18.018398"
+     ry="17.283054" />
   <text
-     x="100"
-     y="73.376625"
+     x="108.17716"
+     y="106.31327"
      fill="#2d3748"
-     style="font-weight:700;font-size:42px;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;letter-spacing:-1px"
-     id="text2">QUIOSCO</text>
-  <text
-     x="100.97403"
-     y="116.9385"
-     fill="#ff2d20"
-     style="font-weight:300;font-size:38px;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;letter-spacing:2px"
-     id="text3"><tspan
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;-inkscape-font-specification:'Segoe UI, Roboto, Helvetica, Arial, sans-serif Bold'"
-       id="tspan3">6017</tspan></text>
+     style="font-weight:700;font-size:80px;font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;letter-spacing:-1.29862px;stroke-width:1.29862"
+     id="text2"
+     transform="scale(0.99708125,1.0029273)">YA<tspan
+   style="font-size:80px;fill:#ff0000;stroke-width:1.29862"
+   id="tspan1">Q</tspan></text>
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:37.3974px;font-family:'Maple Mono NF CN';-inkscape-font-specification:'Maple Mono NF CN, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#ff2d20;fill-opacity:1;stroke-width:3.11645"
-     x="39.69381"
-     y="87.198891"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:42.3501px;font-family:'Maple Mono NF CN';-inkscape-font-specification:'Maple Mono NF CN, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;writing-mode:lr-tb;direction:ltr;fill:#ff2d20;fill-opacity:1;stroke-width:3.52917"
+     x="43.23679"
+     y="93.941498"
      id="text4"><tspan
        sodipodi:role="line"
        id="tspan4"
-       x="39.69381"
-       y="87.198891"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:37.3974px;font-family:'Maple Mono NF CN';-inkscape-font-specification:'Maple Mono NF CN, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:3.11645">+</tspan></text>
+       x="43.23679"
+       y="93.941498"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:42.3501px;font-family:'Maple Mono NF CN';-inkscape-font-specification:'Maple Mono NF CN, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:3.52917">+</tspan></text>
 </svg>

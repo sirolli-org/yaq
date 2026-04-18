@@ -1,3 +1,5 @@
+<img src="./public/yaq-logo.svg" alt="YAQ Logo" width="200" height="200" style="display: block; margin: 0 auto;" />
+
 # YAQ - Yet Another Quiosco
 
 **YAQ** es un proyecto de software en el marco de las Prácticas Profesionalizantes III de la carrera Tecnicatura Superior en Análisis de Sistemas y Dessarrollo de Software en el Instituto de Enseñanza Superior Nº 6017 "_Prof. Amadeo R. Sirolli_".
