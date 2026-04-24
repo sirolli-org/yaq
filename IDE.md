@@ -36,8 +36,7 @@ En la raíz del proyecto, cree o edite el archivo `.vscode/settings.json`
     },
     "intelephense.files.exclude": [
         "**/.git/**",
-        "**/node_modules/**",
-        "**/vendor/**"
+        "**/node_modules/**"
     ]
 }
 ```
