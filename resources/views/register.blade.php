@@ -1,59 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('components/layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-</head>
+@section('title', 'Registro')
 
-<body>
-    <img src="/yaq-logo.svg" alt="Logo de YAQ">
-    <h1>Registrarse</h1>
+@section('content')
+    <div class="card card--narrow">
+        <h1>Crear cuenta</h1>
 
-    <nav>
-        <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/login">Iniciar sesión</a></li>
-            <li>Registrarse</li>
-        </ul>
-    </nav>
+        <form method="POST" action="/register">
+            @csrf
 
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-
-    <form method="POST" action="/register">
-        @csrf
-
-        <div>
             <label for="name">Nombre</label>
-            <input id="name" name="name" type="text" value="{{ old('name') }}" required>
-        </div>
+            <input id="name" name="name" type="text" value="{{ old('name') }}" autocomplete="name" required autofocus>
 
-        <div>
-            <label for="email">Email:</label><br>
-            <input id="email" name="email" type="email" value="{{ old('email') }}" required>
-        </div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" value="{{ old('email') }}" autocomplete="email" required>
 
-        <div>
-            <label for="password">Password:</label><br>
-            <input id="password" name="password" type="password" required>
-        </div>
+            <label for="password">Contraseña</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" required>
 
-        <div>
-            <label for="password_confirmation">Confirmar password:</label><br>
-            <input id="password_confirmation" name="password_confirmation" type="password" required>
-        </div>
+            <label for="password_confirmation">Confirmar contraseña</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password" required>
 
-        <div>
-            <button type="submit">Crear cuenta</button>
-        </div>
-    </form>
-</body>
+            <button type="submit" class="btn">Crear cuenta</button>
+        </form>
 
-</html>
+        <p style="margin: 1.25rem 0 0; font-size: 0.9375rem;">
+            ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+        </p>
+    </div>
+@endsection

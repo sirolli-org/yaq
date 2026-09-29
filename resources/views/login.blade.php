@@ -1,49 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('components/layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesión</title>
-</head>
+@section('title', 'Iniciar sesión')
 
-<body>
-    <img src="/yaq-logo.svg" alt="Logo de YAQ">
-    <h1>Iniciar sesión</h1>
+@section('content')
+    <div class="card card--narrow">
+        <h1>Iniciar sesión</h1>
 
-    <nav>
-        <ul>
-            <li><a href="/">Inicio</a></li>
-            <li>Iniciar sesión</li>
-            <li><a href="/register">Registrarse</a></li>
-        </ul>
-    </nav>
+        <form method="POST" action="/login">
+            @csrf
 
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" value="{{ old('email') }}" autocomplete="email" required autofocus>
 
-    <form method="POST" action="/login">
-        @csrf
+            <label for="password">Contraseña</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required>
 
-        <div>
-            <label for="email">Email:</label><br>
-            <input id="email" name="email" type="email" value="{{ old('email') }}" required>
-        </div>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
 
-        <div>
-            <label for="password">Password:</label><br>
-            <input id="password" name="password" type="password" required>
-        </div>
-
-        <div>
-            <button type="submit">Entrar</button>
-        </div>
-    </form>
-</body>
-
-</html>
+        <p style="margin: 1.25rem 0 0; font-size: 0.9375rem;">
+            ¿No tienes cuenta? <a href="/register">Regístrate</a>
+        </p>
+    </div>
+@endsection
