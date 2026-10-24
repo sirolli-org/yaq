@@ -34,7 +34,9 @@
                                     {{ $u->estado ? 'Activo' : 'Inactivo' }}
                                 </span>
                             </td>
-                            <td data-label="Último acceso">{{ $u->ultimo_acceso?->format('d/m/Y H:i') ?? '—' }}</td>
+                            <td data-label="Último acceso">
+                                {{ $u->ultimo_acceso?->timezone('America/Argentina/Buenos_Aires')->format('d/m/Y H:i') ?? '—' }}
+                            </td>
                             <td class="actions">
                                 @unless ($u->is(auth()->user()))
                                     <form method="POST" action="{{ route('usuarios.estado', $u) }}">
