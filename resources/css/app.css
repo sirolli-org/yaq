@@ -395,6 +395,20 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 td.actions { text-align: right; white-space: nowrap; }
 td.actions form { display: inline; margin: 0; }
 
+.nav .btn--danger {
+    color: #fff;
+    background: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 0.4rem 0.9rem;
+    font-weight: 500;
+}
+
+.nav .btn--danger:hover {
+    color: var(--danger-hover);
+    background: #fff;
+    border-color: var(--danger-hover);
+}
+
 /* Estado del stock */
 .badge {
     display: inline-flex;

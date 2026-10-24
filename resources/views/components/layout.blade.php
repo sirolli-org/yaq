@@ -21,15 +21,23 @@
                 <a href="/" @if (request()->is('/')) aria-current="page" @endif>Inicio</a>
 
                 @auth
-                    <a href="/welcome" @if (request()->is('welcome')) aria-current="page" @endif>Welcome</a>
+                    <a href="/panel" @if (request()->is('panel')) aria-current="page" @endif>Panel</a>
 
-                    <form method="POST" action="/logout">
+                    @if (auth()->user()->esAdministrador())
+                        <a href="{{ route('usuarios.index') }}" @if (request()->is('usuarios*')) aria-current="page" @endif>Usuarios</a>
+                    @endif
+
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="btn btn--danger">Cerrar sesión</button>
+                        <button type="submit" class="btn btn--danger btn--sm">Cerrar sesión</button>
                     </form>
+
                 @else
                     <a href="/login" @if (request()->is('login')) aria-current="page" @endif>Iniciar sesión</a>
-                    <a href="/register" @if (request()->is('register')) aria-current="page" @endif>Registrarse</a>
+
+                    @if (\App\Models\User::doesntExist())
+                        <a href="/register" @if (request()->is('register')) aria-current="page" @endif>Registrarse</a>
+                    @endif
                 @endauth
             </nav>
         </div>

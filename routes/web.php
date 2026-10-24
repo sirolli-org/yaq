@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,9 +17,16 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/welcome', function () {
-        return view('welcome');
+    Route::get('/panel', function () {
+        return view('panel');
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::prefix('usuarios')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('usuarios.index');
+        Route::get('/crear', [UserController::class, 'create'])->name('usuarios.create');
+        Route::post('/', [UserController::class, 'store'])->name('usuarios.store');
+        Route::patch('/{user}/estado', [UserController::class, 'toggleEstado'])->name('usuarios.estado');
+    });
 });
