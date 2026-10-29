@@ -232,6 +232,44 @@ p { margin: 0 0 1rem; max-width: 70ch; }
 .card__header h2,
 .card__header h3 { margin: 0; }
 
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.section-grid .card { margin-top: 0; }
+
+.section-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.section-card:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.section-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: var(--radius-sm);
+}
+
+.section-card__title { margin: 0; font-size: 1.0625rem; }
+.section-card__text { margin: 0; font-size: 0.9375rem; color: var(--muted); }
+
 /* Indicadores del panel (productos, stock bajo, valor del inventario...) */
 .stats {
     display: grid;

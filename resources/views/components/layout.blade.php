@@ -23,13 +23,9 @@
                 @auth
                     <a href="/panel" @if (request()->is('panel')) aria-current="page" @endif>Panel</a>
 
-                    @if (auth()->user()->esAdministrador())
-                        <a href="{{ route('usuarios.index') }}" @if (request()->is('usuarios*')) aria-current="page" @endif>Usuarios</a>
-                    @endif
-
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="btn btn--danger btn--sm">Cerrar sesión</button>
+                        <button type="submit" class="btn btn--danger btn--sm" style="margin-left: 10px;">Cerrar sesión</button>
                     </form>
 
                 @else
