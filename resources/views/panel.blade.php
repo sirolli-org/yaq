@@ -1,4 +1,3 @@
-{{-- resources/views/panel.blade.php --}}
 @extends('components/layout')
 
 @section('title', 'Panel')
@@ -24,7 +23,30 @@
             <p class="section-card__text">Consulta el stock, los precios y la información de cada producto.</p>
         </a>
 
+        <a class="card section-card" href="{{ route('ventas.index') }}">
+            <span class="section-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+            </span>
+            <h2 class="section-card__title">Ventas</h2>
+            <p class="section-card__text">Registra ventas y revisa el detalle de las operaciones realizadas.</p>
+        </a>
+
         @if (auth()->user()->esAdministrador())
+            <a class="card section-card" href="{{ route('historial.index') }}">
+                <span class="section-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 2"/>
+                    </svg>
+                </span>
+                <h2 class="section-card__title">Historial</h2>
+                <p class="section-card__text">Audita los cambios realizados sobre productos y usuarios.</p>
+            </a>
+
             <a class="card section-card" href="{{ route('usuarios.index') }}">
                 <span class="section-card__icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
